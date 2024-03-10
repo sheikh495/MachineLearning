@@ -1,0 +1,251 @@
+:stem:
+
+ ** Name: Sheikh Uddin
+ ** Course: COSC 522
+ ** Module: M3
+
+ 
+:toc:
+
+== Problems
+
+=== Problem 1
+In this homework, you will do a Naive Bayes Classification by hand. Our data for the M3 homework is a modified version of a list of Pokemon of Water, Normal, and Flying type. We will be using a smaller version with 12 example Pokemon.
+
+|===
+| Name               | HP   | Attack | Defense | Type   
+| Vigoroth           | Mid  | High   | Mid     | Normal 
+| Dodrio             | High | Mid    | High    | Normal 
+| Farfetch'd         | Low  | High   | Low     | Normal 
+| Lillipup           | Low  | Low    | Low     | Normal 
+| Jellicent          | Mid  | Low    | High    | Water  
+| Corsola            | Low  | Low    | Mid     | Water  
+| Piplup             | Low  | Low    | Low     | Water  
+| Marill             | High | Low    | Low     | Water  
+| Landorus Therian Forme | Mid  | Mid    | Mid     | Flying 
+| Beautifly          | High | High   | Low     | Flying 
+| Tropius            | Mid  | High   | Mid     | Flying 
+| Drifblim           | Mid  | High   | Low     | Flying 
+|===
+
+
+Our overall goal is to look at a Pokemon outside of our dataset to see whether the Type is more likely Normal, Water, or Flying. In particular, we will estimate this for the Mandibuzz Pokemon, which has HP=Mid, Attack=High, and Defense=Mid.
+
+=== Question 1:
+
+Calculate the Prior Probability of P(y) for Type across the whole dataset:
+
+=== Question 2:
+Please calculate a subset of the likelihood for each of the features HP, Attack, and Defense for each feature.
+
+=== Question 3:
+Calculate the posterior probability for each Type, given the features of Mandibuzz which we will represent as “Features”: (HP=Mid, Attack=High, and Defense=Mid). Using the assumption that each feature (HP, Attack, and Defense) is independent, then this can be calculated by applying bayes law like the following:
+
+ 
+For example,
+ 
+\[p(Type=Normal | Features) = \frac{( p(HP=Mid │Type=Normal) * p(Attack=High │Type=Normal) * p(Defense=Mid │Type=Normal) * p(Type=Normal))} {(p(Features))}\]
+
+
+
+Here, you can calculate
+
+\[p(Features)=:\]
+\[p(Features│Type=Normal)*p(Normal)+ \]
+\[p(Features│Type=Water)*p(Type=Water)+ \]
+\[p(Features| Type=Flying)*p(Type=Flying) \]
+
+=== Question 4:
+
+Which Pokeymon Type (i.e. Normal, Water, Mid) has the highest probability and should be our predicted answer?
+
+
+== Answers
+
+=== Answer 1
+
+== Prior Probability Calculation ==
+
+To calculate the prior probability `P(y)` for each type (Normal, Water, and Flying), we need to count the number of occurrences of each type in the dataset and then divide it by the total number of examples.
+
+Given the dataset:
+
+|===
+| Name               | HP   | Attack | Defense | Type   
+| Vigoroth           | Mid  | High   | Mid     | Normal 
+| Dodrio             | High | Mid    | High    | Normal 
+| Farfetch'd         | Low  | High   | Low     | Normal 
+| Lillipup           | Low  | Low    | Low     | Normal 
+| Jellicent          | Mid  | Low    | High    | Water  
+| Corsola            | Low  | Low    | Mid     | Water  
+| Piplup             | Low  | Low    | Low     | Water  
+| Marill             | High | Low    | Low     | Water  
+| Landorus Therian Forme | Mid  | Mid    | Mid     | Flying 
+| Beautifly          | High | High   | Low     | Flying 
+| Tropius            | Mid  | High   | Mid     | Flying 
+| Drifblim           | Mid  | High   | Low     | Flying 
+|===
+
+First, let's count the occurrences of each type:
+
+- Normal: 4 examples
+- Water: 4 examples
+- Flying: 4 examples
+
+Total number of examples: 12
+
+Now, we can calculate the prior probability of each type:
+
+- \( P(\text{Normal}) = \frac{4}{12} = \frac{1}{3} \)
+- \( P(\text{Water}) = \frac{4}{12} = \frac{1}{3} \)
+- \( P(\text{Flying}) = \frac{4}{12} = \frac{1}{3} \)
+
+So, the prior probabilities of each type are:
+
+- \( P(\text{Normal}) = \frac{1}{3} \)
+- \( P(\text{Water}) = \frac{1}{3} \)
+- \( P(\text{Flying}) = \frac{1}{3} \)
+
+
+
+=== Answer 2
+
+To calculate the subset of likelihood for each feature (HP, Attack, Defense) for each type (Normal, Water, Flying), we'll count the occurrences of each feature value within each type and normalize them.
+
+**For HP:**
+
+For Normal type Pokémon:
+
+- \(p(HP=Mid |Type=Normal) = \frac{1}{4}\) (1 occurrence of "Mid" out of 4 Normal type Pokémon)
+
+For Water type Pokémon:
+- \(p(HP=Mid |Type=Water) = \frac{1}{4}\) (1 occurrences of "Mid" out of 4 Water type Pokémon)
+
+For Flying type Pokémon:
+- \(p(HP=Mid |Type=Flying) = \frac{3}{4}\) (3 occurrence of "Mid" out of 4 Flying type Pokémon)
+
+**For Attack:**
+
+For Normal type Pokémon:
+- \(p(Attack=High |Type=Normal) = \frac{2}{4}\) (2 occurrences of "High" out of 4 Normal type Pokémon)
+
+For Water type Pokémon:
+- \(p(Attack=High |Type=Water) = \frac{0}{4}\) (0 occurrences of "High" out of 4 Water type Pokémon)
+
+For Flying type Pokémon:
+- \(p(Attack=High |Type=Flying) = \frac{3}{4}\) (3 occurrences of "High" out of 4 Flying type Pokémon)
+
+**For Defense:**
+
+For Normal type Pokémon:
+- \(p(Defense=Mid |Type=Normal) = \frac{1}{4}\) (1 occurrence of "Mid" out of 4 Normal type Pokémon)
+
+For Water type Pokémon:
+- \(p(Defense=Mid |Type=Water) = \frac{1}{4}\) (1 occurrence of "Mid" out of 4 Water type Pokémon)
+
+For Flying type Pokémon:
+- \(p(Defense=Mid |Type=Flying) = \frac{2}{4}\) (2 occurrence of "Mid" out of 4 Flying type Pokémon)
+
+
+
+=== Answer 3
+
+To calculate the posterior probability for each type (Normal, Water, and Flying) given the features of Mandibuzz (HP=Mid, Attack=High, and Defense=Mid) using Bayes' theorem and the assumption that each feature (HP, Attack, and Defense) is independent, we'll follow these steps:
+
+### Step 1: Calculate the likelihood of the given features for each type:
+
+For Normal type:
+\[ p(HP=Mid | Type=Normal) \times p(Attack=High | Type=Normal) \times p(Defense=Mid | Type=Normal) \]
+
+\[ = \frac{1}{4} \times \frac{2}{4} \times \frac{1}{4} \]
+
+\[ = \frac{2}{64} \]
+\[ = \frac{1}{32} \]
+
+For Water type:
+\[ p(HP=Mid | Type=Water) \times p(Attack=High | Type=Water) \times p(Defense=Mid | Type=Water) \]
+
+\[ = \frac{1}{4} \times \frac{0}{4} \times \frac{3}{4} \]
+
+\[ = 0\]
+
+
+For Flying type:
+\[ p(HP=Mid | Type=Flying) \times p(Attack=High | Type=Flying) \times p(Defense=Mid | Type=Flying) \]
+
+\[ = \frac{3}{4} \times \frac{3}{4} \times \frac{2}{4} \]
+
+\[ = \frac{18}{64} \]
+\[ = \frac{9}{32} \]
+
+### Step 2: Calculate the prior probability for each type:
+
+Since we have three types with equal probabilities, \( p(Type) = \frac{1}{3} \) for each type.
+
+### Step 3: Calculate the denominator \( p(Features) \):
+
+\[ p(Features) = p(Features|Normal) \times p(Normal) + p(Features|Water) \times p(Water) + p(Features|Flying) \times p(Flying) \]
+
+\[ = \frac{1}{32} \times \frac{1}{3} + 0 \times \frac{1}{3} + \frac{18}{64} \times \frac{1}{3} \]
+
+\[ = \frac{1}{96} + 0 + \frac{18}{192} \]
+\[ = \frac{1}{96} + 0 + \frac{9}{96} \]
+
+\[ = \frac{1}{96} + \frac{9}{96} \]
+
+\[ = \frac{10}{96} \]
+\[ = \frac{5}{48} \]
+
+### Step 4: Calculate the posterior probability for each type:
+
+Using Bayes' theorem:
+
+\[
+p(Type | Features) = \frac{{p(Features | Type) \times p(Type)}}{{p(Features)}}
+\]
+
+Now, let's perform these calculations.
+
+
+
+For Normal type:
+\[ p(Type=Normal | Features) = \frac{p(Features | Type=Normal) \times p(Type=Normal)}{p(Features)} \]
+
+\[ = \frac{\frac{1}{32} \times \frac{1}{3}}{\frac{5}{48}} \]
+
+\[ = \frac{\frac{1}{96}}{\frac{5}{48}} \]
+
+\[ = \frac{1}{10} =0.1\]
+
+For Water type:
+\[ p(Type=Water | Features) = \frac{p(Features | Type=Water) \times p(Type=Water)}{p(Features)} \]
+
+\[ = \frac{0 \times \frac{1}{3}}{\frac{5}{48}} \]
+
+\[ = 0 \]
+
+For Flying type:
+\[ p(Type=Flying | Features) = \frac{p(Features | Type=Flying) \times p(Type=Flying)}{p(Features)} \]
+
+\[ = \frac{\frac{9}{32} \times \frac{1}{3}}{\frac{5}{48}} \]
+
+\[ = \frac{\frac{9}{96}}{\frac{5}{48}} \]
+
+\[ = \frac{9}{10}=0.9 \]
+
+So, the posterior probability for each type is:
+
+- \( p(Type=Normal | Features) = \frac{1}{10}=0.1 \)
+- \( p(Type=Water | Features) = 0 \)
+- \( p(Type=Flying | Features) = \frac{9}{10}=0.9 \)
+
+
+=== Answer 4
+
+Based on the calculated posterior probabilities:
+
+- \( p(\text{Type=Normal | Features}) = 0.1 \)
+- \( p(\text{Type=Water | Features}) = 0 \)
+- \( p(\text{Type=Flying | Features}) = 0.9 \)
+
+The type with the highest probability is Flying, with a posterior probability of 0.9. Therefore, based on these calculations, the predicted answer should be Flying.
